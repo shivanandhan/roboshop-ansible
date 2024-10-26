@@ -1,0 +1,31 @@
+
+#PRINT Download Application Content
+#curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip  &>>$LOG_FILE
+#STAT $?
+#
+#PRINT Extract Application Content
+#cd ${app_path}
+#unzip /tmp/${component}.zip  &>>$LOG_FILE
+#STAT $?
+
+- name: Adding Application User
+  ansible.builtin.user:
+    name: roboshop
+    create_home: yes
+
+- name: Delete old directory
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: create new directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Download and extract the content
+  ansible.builtin.unarchive:
+          src: https://roboshop-artifacts.s3.amazonaws.com/{{ app_name }}-v3.zip
+          dest: /app
+          remote_src: yes
+

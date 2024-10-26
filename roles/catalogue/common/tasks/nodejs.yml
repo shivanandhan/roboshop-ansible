@@ -1,0 +1,36 @@
+
+#APP_PREREQ
+#
+#PRINT Download NodeJS Dependencies
+#npm install &>>$LOG_FILE
+#STAT $?
+#
+#SCHEMA_SETUP
+#SYSTEMD_SETUP
+
+- name: Disable NodeJS Default Version
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Enable NodejS 20 Module
+  ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+- name: Install NodeJs
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed
+
+- name: Load App prerequistes
+  ansible.builtin.include_tasks:
+          file: app_prerequisites.yml
+
+- name: Install NodeJS Dependencies.
+  community.general.npm:
+    path: /app
+
+- name: systemd setup
+  ansible.builtin.include_tasks:
+    file: systemd_setup.yml
+
+
+
+
