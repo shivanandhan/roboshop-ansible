@@ -15,36 +15,22 @@
      src: nginx.conf
      dest: /etc/nginx/nginx.conf
 
-  - name: start nginx
-    ansible.builtin.systemd_service:
-     name: nginx
-     state: started
+  - name: clean up old application directory
+    ansible.builtin.file:
+     path: /usr/share/nginx/html
 
+  - name: Create a directory if it does not exist
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directory
 
-       #source common.sh
-       #component=frontend
-       #app_path=/usr/share/nginx/html
-       #
-       #
-       #PRINT Disable Nginx default Version
-       #dnf module disable nginx -y  &>>$LOG_FILE
-       #STAT $?
-       #
-       #PRINT Enable Nginx 24 Version
-       #dnf module enable nginx:1.24 -y  &>>$LOG_FILE
-       #STAT $?
-       #
-       #PRINT Install Nginx
-       #dnf install nginx -y  &>>$LOG_FILE
-       #STAT $?
-       #
-       #PRINT Copy nginx config file
-       #cp nginx.conf /etc/nginx/nginx.conf  &>>$LOG_FILE
-       #STAT $?
-       #
-       #APP_PREREQ
-       #
-       #PRINT Start Nginx Service
-       #systemctl enable nginx  &>>$LOG_FILE
-       #systemctl restart nginx  &>>$LOG_FILE
-      #STAT $?
+  - name: Download and extract the content
+    ansible.builtin.unarchive:
+      src: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+
+  -  name: start nginx
+     ansible.builtin.systemd_service:
+       name: nginx
+       state: restarted
