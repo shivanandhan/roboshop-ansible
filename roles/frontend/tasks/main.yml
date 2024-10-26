@@ -1,7 +1,4 @@
-  -  name: frontend
-     hosts: all
-     become: yes
-     tasks:
+
   -  name: Disable default nginx
      ansible.builtin.shell: dnf module disable nginx -y
 
