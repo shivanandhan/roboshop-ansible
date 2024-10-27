@@ -1,13 +1,4 @@
 
-#PRINT Download Application Content
-#curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip  &>>$LOG_FILE
-#STAT $?
-#
-#PRINT Extract Application Content
-#cd ${app_path}
-#unzip /tmp/${component}.zip  &>>$LOG_FILE
-#STAT $?
-
 - name: Adding Application User
   ansible.builtin.user:
     name: roboshop
