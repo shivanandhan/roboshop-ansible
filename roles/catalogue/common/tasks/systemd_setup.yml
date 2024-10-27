@@ -1,4 +1,3 @@
-
 - name: Copy Service file
   ansible.builtin.template:
     src: "{{ app_name }}.service"
