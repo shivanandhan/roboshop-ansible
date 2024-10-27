@@ -7,9 +7,9 @@
 - name: Install NodeJs
   ansible.builtin.dnf:
     name: nodejs
-    state: latest
+    state: installed
 
-- name: Load App prerequistes
+- name: Load App prerequisites
   ansible.builtin.include_tasks:
     file: app_prerequisites.yml
 
