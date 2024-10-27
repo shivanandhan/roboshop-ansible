@@ -2,7 +2,6 @@
   tasks:
     - name: this is test
       include_role:
-        static: no
         name: common
         tasks_from: nodejs
 
