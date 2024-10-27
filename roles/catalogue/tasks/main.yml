@@ -1,8 +1,6 @@
 - name: Setup NodeJS Service
-  tasks:
-    - name: this is test
-      include_role:
-        name: common
-        tasks_from: nodejs
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: nodejs
 
 
