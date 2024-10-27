@@ -12,7 +12,7 @@
 
 - name: Load App prerequistes
   ansible.builtin.include_tasks:
-          file: app_prerequisites.yml
+    file: app_prerequisites.yml
 
 - name: Install NodeJS Dependencies.
   community.general.npm:
