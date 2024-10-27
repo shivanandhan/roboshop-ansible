@@ -2,7 +2,6 @@
 - name: Adding Application User
   ansible.builtin.user:
     name: roboshop
-    create_home: yes
 
 - name: Delete old directory
   ansible.builtin.file:
