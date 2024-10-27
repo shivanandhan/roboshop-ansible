@@ -1,13 +1,4 @@
 
-#APP_PREREQ
-#
-#PRINT Download NodeJS Dependencies
-#npm install &>>$LOG_FILE
-#STAT $?
-#
-#SCHEMA_SETUP
-#SYSTEMD_SETUP
-
 - name: Disable NodeJS Default Version
   ansible.builtin.shell: dnf module disable nodejs -y
 
