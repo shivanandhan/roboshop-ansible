@@ -1,2 +1,3 @@
 default:
-    @echo hello
+	echo print message
+
